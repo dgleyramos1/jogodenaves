@@ -19,6 +19,9 @@ function start(){
     
     jogo.pressionou = [];
 
+    var velocidade=5;
+    var posicaoY = parseInt(Math.random() * 334);
+
     //Verifica se o usuário pressionou alguma tecla	
 	
 	$(document).keydown(function(e){
@@ -38,6 +41,7 @@ function start(){
 	
 	    movefundo();
         movejogador();
+        moveinimigo1();
 	
 	} // Fim da função loop()
 
@@ -83,6 +87,20 @@ function start(){
         }
     
     } // fim da função movejogador()
+
+    function moveinimigo1() {
+
+        posicaoX = parseInt($("#inimigo1").css("left"));
+        $("#inimigo1").css("left",posicaoX-velocidade);
+        $("#inimigo1").css("top",posicaoY);
+            
+            if (posicaoX<=0) {
+            posicaoY = parseInt(Math.random() * 334);
+            $("#inimigo1").css("left",694);
+            $("#inimigo1").css("top",posicaoY);
+                
+            }
+    } //Fim da função moveinimigo1()
     
 
 }
