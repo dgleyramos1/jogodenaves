@@ -7,6 +7,7 @@ function start(){
     $("#fundoGame").append("<div id='inimigo1' class='anima2'></div>");
     $("#fundoGame").append("<div id='inimigo2'></div>");
     $("#fundoGame").append("<div id='amigo' class='anima3'></div>");
+    $("#fundoGame").append("<div id='placar'></div>");
 
     //Principais variáveis do jogo
 	
@@ -23,6 +24,9 @@ function start(){
     var posicaoY = parseInt(Math.random() * 334);
     var podeAtirar=true;
     var fimdejogo=false;
+    var pontos=0;
+    var salvos=0;
+    var perdidos=0;
 
     //Verifica se o usuário pressionou alguma tecla	
 	
@@ -47,6 +51,7 @@ function start(){
         moveinimigo2();
         moveamigo();
         colisao();
+        placar();
         
 	
 	} // Fim da função loop()
@@ -202,6 +207,7 @@ function start(){
 		
             inimigo1X = parseInt($("#inimigo1").css("left"));
             inimigo1Y = parseInt($("#inimigo1").css("top"));
+            pontos=pontos+100;
                 
             explosao1(inimigo1X,inimigo1Y);
             $("#disparo").css("left",950);
@@ -217,6 +223,7 @@ function start(){
             
             inimigo2X = parseInt($("#inimigo2").css("left"));
             inimigo2Y = parseInt($("#inimigo2").css("top"));
+            pontos=pontos+50;
             $("#inimigo2").remove();
         
             explosao2(inimigo2X,inimigo2Y);
@@ -229,7 +236,7 @@ function start(){
         // jogador com o amigo
             
         if (colisao5.length>0) {
-            
+            salvos++;
             reposicionaAmigo();
             $("#amigo").remove();
         }
@@ -239,6 +246,7 @@ function start(){
                 
             amigoX = parseInt($("#amigo").css("left"));
             amigoY = parseInt($("#amigo").css("top"));
+            perdidos++;
             explosao3(amigoX,amigoY);
             $("#amigo").remove();
                     
@@ -346,6 +354,12 @@ function start(){
         }
     
     } // Fim da função explosao3
+    function placar() {
+	
+        $("#placar").html("<h2> Pontos: " + pontos + " Salvos: " + salvos + " Perdidos: " + perdidos + "</h2>");
+        
+    } //fim da função placar()
+    
     
 
 }
