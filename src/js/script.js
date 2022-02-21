@@ -30,6 +30,17 @@ function start(){
     var perdidos=0;
     var energiaAtual=3;
 
+    var somDisparo=document.getElementById("somDisparo");
+    var somExplosao=document.getElementById("somExplosao");
+    var musica=document.getElementById("musica");
+    var somGameover=document.getElementById("somGameover");
+    var somPerdido=document.getElementById("somPerdido");
+    var somResgate=document.getElementById("somResgate");
+
+    //Música em loop
+    musica.addEventListener("ended", function(){ musica.currentTime = 0; musica.play(); }, false);
+    musica.play();
+
     //Verifica se o usuário pressionou alguma tecla	
 	
 	$(document).keydown(function(e){
@@ -143,7 +154,7 @@ function start(){
     function disparo() {
 	
         if (podeAtirar==true) {
-            
+            somDisparo.play();
             podeAtirar=false;
             
             topo = parseInt($("#jogador").css("top"))
@@ -243,6 +254,7 @@ function start(){
             
         if (colisao5.length>0) {
             salvos++;
+            somResgate.play();
             reposicionaAmigo();
             $("#amigo").remove();
         }
@@ -273,6 +285,7 @@ function start(){
         div.css("top", inimigo1Y);
         div.css("left", inimigo1X);
         div.animate({width:200, opacity:0}, "slow");
+        somExplosao.play();
         
         var tempoExplosao = window.setInterval(removeExplosao, 1000);
 	
@@ -295,6 +308,7 @@ function start(){
         div2.css("top", inimigo2Y);
         div2.css("left", inimigo2X);
         div2.animate({width:200, opacity:0}, "slow");
+        somExplosao.play();
         
         var tempoExplosao2=window.setInterval(removeExplosao2, 1000);
         
@@ -351,11 +365,12 @@ function start(){
         $("#fundoGame").append("<div id='explosao3' class='anima4'></div");
         $("#explosao3").css("top",amigoY);
         $("#explosao3").css("left",amigoX);
+        somPerdido.play();
         var tempoExplosao3=window.setInterval(resetaExplosao3, 1000);
         function resetaExplosao3() {
-        $("#explosao3").remove();
-        window.clearInterval(tempoExplosao3);
-        tempoExplosao3=null;
+            $("#explosao3").remove();
+            window.clearInterval(tempoExplosao3);
+            tempoExplosao3=null;
                 
         }
     
