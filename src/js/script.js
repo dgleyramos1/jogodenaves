@@ -213,6 +213,7 @@ function start(){
             inimigo1X = parseInt($("#inimigo1").css("left"));
             inimigo1Y = parseInt($("#inimigo1").css("top"));
             pontos=pontos+100;
+            velocidade=velocidade+0.3;
                 
             explosao1(inimigo1X,inimigo1Y);
             $("#disparo").css("left",950);
